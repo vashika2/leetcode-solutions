@@ -1,0 +1,28 @@
+import java.util.*;
+
+class Solution {
+    public boolean find132pattern(int[] nums) {
+        int n = nums.length;
+
+        Stack<Integer> stack = new Stack<>();
+        int third = Integer.MIN_VALUE;
+
+        // Traverse from right to left
+        for (int i = n - 1; i >= 0; i--) {
+
+            // Found nums[i] < nums[k]
+            if (nums[i] < third) {
+                return true;
+            }
+
+            // Maintain possible nums[j] and nums[k]
+            while (!stack.isEmpty() && nums[i] > stack.peek()) {
+                third = stack.pop();
+            }
+
+            stack.push(nums[i]);
+        }
+
+        return false;
+    }
+}
