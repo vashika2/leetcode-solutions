@@ -1,0 +1,28 @@
+class Solution {
+    public double myPow(double x, int n) {
+        long power = n; // Convert to long to handle Integer.MIN_VALUE
+
+        // Handle negative exponent
+        if (power < 0) {
+            x = 1 / x;
+            power = -power;
+        }
+
+        double ans = 1.0;
+
+        while (power > 0) {
+            // If the current exponent is odd, multiply answer by x
+            if ((power & 1) == 1) {
+                ans *= x;
+            }
+
+            // Square the base
+            x *= x;
+
+            // Divide exponent by 2
+            power /= 2;
+        }
+
+        return ans;
+    }
+}
